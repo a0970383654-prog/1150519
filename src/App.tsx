@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { 
   ShieldAlert, Plus, Camera, Activity, FileText, 
-  ChevronLeft, MapPin, Calendar, ShieldCheck, 
+  MapPin, Calendar, 
   AlertTriangle, CheckCircle2, Factory, Loader2,
-  HardHat, UserCheck, TrendingUp, Clock, Filter, Printer, BarChart3, LineChart as LineChartIcon, Zap,
-  ListChecks, ArrowRightCircle, Bell, LayoutDashboard, Globe
+  HardHat, UserCheck, Clock, BarChart3, Zap,
+  ListChecks, Bell, LayoutDashboard, Globe
 } from 'lucide-react';
 import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -334,8 +334,6 @@ export default function App() {
   }
 
   // DYNAMIC CHART DATA GENERATION
-  const totalIssues = inspections.length;
-  const pendingIssues = inspections.filter(i => i.improvementStatus === 'pending').length;
   const highRiskIssues = inspections.filter(i => i.aiResult.level === 'High' && i.improvementStatus === 'pending').length;
 
   let filteredInspections = inspections.filter(i => {
@@ -545,7 +543,7 @@ export default function App() {
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie data={riskData} cx="50%" cy="50%" innerRadius={50} outerRadius={75} paddingAngle={2} dataKey="value" stroke="none">
-                            {riskData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                            {riskData.map((_entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                           </Pie>
                           <Tooltip contentStyle={tooltipStyle} />
                           <Legend verticalAlign="middle" align="right" layout="vertical" wrapperStyle={{ fontSize: '11px', color: chartAxisColor }}/>
